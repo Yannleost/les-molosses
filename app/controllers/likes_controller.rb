@@ -1,8 +1,18 @@
 class LikesController < ApplicationController
 
-  def index
-    @like.dog = @dog
-    @dogs = Dogs.where(on: 1)
+  def new
+  	@like = Like.new
+  	authorize @like
   end
 
+  def create
+  	@like = Like.new(like_params)
+  	@authorize @like
+  	@like.save
+  end
+
+  private
+  def like_params
+  	params.require(:like).permit()
+  end
 end

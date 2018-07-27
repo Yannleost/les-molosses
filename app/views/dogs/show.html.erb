@@ -8,6 +8,7 @@
 			<li> Race : <%= @dog.breed %></li>
 			<li> Maitre : <%= @dog.user.email %></li>
 			<li> Addresse du chien : <%= @dog.address %> </li>
+      <li> Nombre de like : <%= @likes%></li>
 		</ul>
   </div>
 <div class="col-xs-6">
@@ -29,6 +30,7 @@
           <%= link_to 'supprimer', @dog, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger list-inline" %>
         <% end %>
         <%= link_to "Back to index", dogs_path, class: "btn btn-primary list-inline"%>
-     
+        <button type="button">Like it ! </button>
+    
 
  
