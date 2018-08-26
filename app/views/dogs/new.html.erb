@@ -1,9 +1,9 @@
 
 <div class="container">
- 
+
     <%= simple_form_for (@dog) do |f| %>
-      
-      <div class= "head-form-for row">
+
+      <div class= "row">
         <div class="col-sm-6"><%= f.input :picture, placeholder: 'Photo'%> </div>
         <div class="col-sm-4"><%= f.input :picture_cache, as: :hidden %></div>
         <div class="col-sm-6"><%= f.input :video %></div>
@@ -11,19 +11,25 @@
         <br>
 
       <div class="row">
-         <div class="col-sm-4"> <%= f.input :nickname %></div>
-         <div class="col-sm-4"> <%= f.input :birthday_date %> </div>
+         <div class="col-sm-5"> <%= f.input :nickname %></div>
+         <div class="col-sm-5"> <%= f.input :birthday_date %> </div>
+     </div>
+
+       <div class="row">
          <div class="col-sm-4"> <%= f.input :breed %></div>
+         <div class="col-sm-4"> <%= f.input :version %></div>
+         <div class="col-sm-4"><%= f.input :size %></div>
       </div>
 
-      <div class= "body-form-for row">
-        
-        <div class="col-sm-4"><%= f.input :size %></div>
+      <div class= "row">
+
         <div class="col-sm-4"> <%= f.input :hair %></div>
         <div class="col-sm-4"> <%= f.input :color %></div>
+        <div class="col-sm-4"> <%= f.input :eye_color %></div>
+
       </div>
-      
-      <div class= "details-form-for row">
+
+      <div class= "row">
          <div class="col-sm-4"><%= f.input :lof_number %></div>
          <div class="col-sm-4"><%= f.input :father_lof %></div>
          <div class="col-sm-4"><%= f.input :mother_lof %></div>
@@ -33,7 +39,7 @@
          <div class="col-sm-6"><%= f.input :medical_analyse %></div>
          <div class="col-sm-6"><%= f.input :prize, label: "Won prize" %></div>
        </div>
-        
+
       <div class="row">
         <div class="col-sm-6"> <%= f.input :address %> </div>
       </div>
@@ -42,11 +48,11 @@
       <div class="description-form-for"><%= f.input :description, label: " Description" %></div>
       </div>
 
-      <div class="row">   
+      <div class="row">
         <div class="col-sm-6"> <%= f.input :price %></div>
         <div class="col-sm-6"> <%= f.submit "add a dog", class: "btn-form-new btn btn-warning " %></div></div>
       <% end %>
 
-      
+
   </div>
 

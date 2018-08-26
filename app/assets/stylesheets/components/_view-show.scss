@@ -1,6 +1,6 @@
 .view-show{
  margin:0px auto;
- 
+
 }
 .grid-show {
   display: grid;
@@ -33,7 +33,7 @@
  background-position: center;
  border-radius: 2px;
  height: 100%;
- width: 100%; 
+ width: 100%;
  background-position: center;
 }
 
@@ -42,14 +42,26 @@
  grid-row: 3 / span 1;
  text-align: center;
 }
-  
-.grid-logo {
+
+.grid-caracteristique {
   grid-column: 2 / span 1;
   grid-row: 4 / span 1;
   background-color: #F2F2F2;
   border-radius: 2px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
+  display: flex;
 }
+
+/// CONTENU DE LA DESCRITPION
+
+.esthetique, .lof, .divers {
+ border-right: 2px solid white;
+ width: 33%;
+ height: 100%;
+}
+
+
+
 
 .grid-description {
   grid-column: 2 / span 1;
@@ -58,6 +70,7 @@
   background-color: #F2F2F2;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
 }
+
 
 .grid-user {
   grid-column: 1 / span 1;
@@ -78,9 +91,9 @@
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
 }
 
-.grid-user-avatar { 
+.grid-user-avatar {
   border-radius: 50%;
-  width: 70px;  
+  width: 70px;
 }
 
 .grid-review {

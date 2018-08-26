@@ -6,7 +6,6 @@
   border-radius: 2px;
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.15);
-
 }
 
 .card_small {
@@ -55,18 +54,18 @@
   text-transform: uppercase;
 }
 
-// Carte description
+// Carte head
 
-.card-description {
+.card-head {
   position: relative;
   top: 10px;
   left: 10px;
 }
-.card-description h2 {
+.card-head h2 {
   font-size: 24px;
 }
 
-.card-description h2 a {
+.card-head h2 a {
  color: white;
  position: absolute;
  left: -4px;
@@ -74,7 +73,7 @@
 
 }
 
-.card-description p {
+.card-head p {
   font-size: 14px;
   opacity: 0.7;
   font-weight: lighter;
@@ -94,6 +93,27 @@
   opacity: 0.1;
 }
 
+// Description
+
+.card-description {
+  position: absolute;
+  background-color: red;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: black;
+  margin-top: 190px;
+}
+
+.card-description-breed, .card-description-size, .card-description-color {
+  min-width: 30%;
+  border: 2px solid;
+}
+
+// Footer
+
 .card-footer {
   position: absolute;
   font-size: 14px;
@@ -102,6 +122,14 @@
   color: black;
 }
 
+.card-footer-price {
+  position: absolute;
+  margin-left: 240px;
+  min-width: 100px;
+  margin-top: -21px;
+  color: #ea9632;
+  font-size: 17px;
+}
 
 
 

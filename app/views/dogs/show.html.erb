@@ -4,7 +4,7 @@
   <div class="view-show">
 
     <div class="grid-show">
-        
+
         <div class="grid-retour">
           <%= link_to 'Retour', index_search_path, class: "btn btn-warning" %>
         </div>
@@ -15,7 +15,7 @@
 
         <div class="grid-image">
             <% if @dog.picture_url  %>
-              <div class="image-show" 
+              <div class="image-show"
               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @dog.picture, height: 300, width: 400, crop: :fill%>');">
               </div>
               <% else %>
@@ -25,7 +25,7 @@
               </div>
              <% end %>
          </div>
-    
+
           <div class="grid-bouton">
               <% if policy(@dog).update? %>
               <%= link_to 'Edit', edit_dog_path(@dog), class: "btn btn-warning list-inline" %>
@@ -35,23 +35,36 @@
               <% if policy(@dog).destroy? %>
               <%= link_to 'supprimer', @dog, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger list-inline" %>
               <% end %>
-              
-          </div> 
 
-          <div class="grid-logo">
-            <%= image_tag "robe.png", class: "icon"%> : <%= @dog.color %>
-            <%= image_tag "brosse.jpg", class: "icon"%> : <%= @dog.hair %>
-            <%= image_tag "mesure.jpg", class: "icon"%> : <%=@dog.size%> cm 
-            <%= image_tag "poids.jpg", class: "icon"%>
-            <%= image_tag "medaille.png", class: "icon"%> : <%= @dog.prize %>
-            <%= image_tag "analyse.png", class: "icon"%> :
           </div>
-                         
+
+          <div class="grid-caracteristique">
+
+            <div class="esthetique">
+              <p>Sous famille : <%= @dog.version %></p>
+              <p> Couleur de la robe : <%= @dog.color %></p>
+              <p> Type de poil : <%= @dog.hair %></p>
+              <p> Couleur des yeux : <%= @dog.eye_color %></p>
+            </div>
+
+            <div class="lof">
+              <p>N° Lof de <%= @dog.nickname %> : <%= @dog.lof_number %></p>
+             <p> N° Lof de sa Maman: <%= @dog.mother_lof %></p>
+             <p> N° Lof de son Papa: <%= @dog.father_lof %></p>
+            </div>
+
+            <div class="divers">
+             <p> Carnet de santé à jour : <%= @dog.medical_analyse %></p>
+             <p> Prix beauté reçu : <%= @dog.prize %></p>
+            </div>
+
+          </div>
+
           <div class="grid-adresse">
-            <%= @dog.address %> 
+            <%= @dog.address %>
           </div>
 
-          <div class="grid-description"> 
+          <div class="grid-description">
             <%= @dog.description %>
           </div>
 
@@ -61,6 +74,9 @@
             <% else %>
             <%= image_tag "avatar.png", alt:"logo", class:"grid-user-avatar"%>
             <% end %>
+
+            <%= @dog.user.first_name %> <%= @dog.user.last_name %>
+            <%= @dog.user.introduction %>
             <p> voici les review de ce chien <p>
             <% @dog.reviews.each do |review| %>
             <ul>
@@ -74,7 +90,7 @@
             id="map"
             style="width: 100%;
             height: 100%;"
-            data-markers="<%= @marker.to_json %>">  
+            data-markers="<%= @marker.to_json %>">
             </div>
           </div>
 
@@ -82,8 +98,8 @@
           Nombre de fois ou le dog à été booké :<%=  @dog.bookings.count %>
           </div>
 
-        </div> 
-</div> 
+        </div>
+</div>
 
 
 
@@ -100,4 +116,4 @@
 
 
 
- 
+
