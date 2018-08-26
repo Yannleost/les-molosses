@@ -1,7 +1,4 @@
-
-=======
-<%= simple_form_for @review, url: dog_booking_reviews_path(:dog_id, :booking_id, @review) do |f| %>
-  <%= f.input :content %>
-  <%= f.button :submit %>
+<%= simple_form_for [@dog, @review], url:  dog_create_review_path do |f| %>
+  <%= f.input :content, label: 'Your review FDP'%>
+  <%= f.submit "add a review", class: "btn btn-primary" %>
 <% end %>
-

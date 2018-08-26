@@ -1,10 +1,15 @@
 class DogsController < ApplicationController
    skip_before_action :authenticate_user!, only: [:index, :show, :create, :edit, :destroy, :index2]
 
+
   def index
    # @dogs = Dog.all
-   @dogs = policy_scope(Dog)
+   # @dogs = Dog.order(:nickname).page params[:page]
+   @dogs = policy_scope(Dog).page params[:page]
+
+  # @records = policy_scope(Record).paginate(params[:page])
   end
+
 
   def show
     @dog = Dog.find(params[:id])
@@ -18,7 +23,7 @@ class DogsController < ApplicationController
   end
 
   def new
-   @dog = Dog.new
+   @dog = Dog.new 
    authorize @dog
   end
 
@@ -40,7 +45,7 @@ class DogsController < ApplicationController
 
   def update
     @dog = Dog.find(params[:id])
-    authorize @dog
+    authorize @dog 
     if @dog.update(dog_params)
       redirect_to dog_path(@dog)
     else
@@ -54,13 +59,14 @@ class DogsController < ApplicationController
     @dog.destroy
     redirect_to dogs_path
   end
-
+  
   def index2
      if params[:query].present?
-        @dogs = Dog.where("breed ILIKE ?", "%#{params[:query]}%")
+        @dogs = Dog.where("breed ILIKE ?", "%#{params[:query]}%").page params[:dog]
       else
-        @dogs = Dog.all
+        @dogs = Dog.all.page params[:page]
     end
+
     authorize @dogs
     @dogsmarkers = Dog.where.not(latitude: nil, longitude: nil)
     @markers = @dogsmarkers.map do |dog|
@@ -69,8 +75,7 @@ class DogsController < ApplicationController
         lng: dog.longitude
       }
 
-    end
-
+  end
 
   end
 

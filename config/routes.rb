@@ -10,9 +10,11 @@ end
   get 'index2', to: 'dogs#index2', as: :index_search
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
  resources :dogs do 
- 	resources :bookings, only: [:new, :create, :show] do 
-    resources :reviews, only: [:new, :create, :show]
-  
-    end
+  resources :reviews, only: [:new, :show, :index]
+  post 'reviews', to: 'reviews#create', as: :create_review
+ 	 end
+ resources :dogs do 
+  resources :bookings, only: [:new, :create, :show] 
   end
 end
+
