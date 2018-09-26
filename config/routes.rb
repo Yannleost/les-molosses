@@ -1,34 +1,39 @@
 
 Rails.application.routes.draw do
-  get 'contact_form/new'
-  get 'contact_form/create'
-devise_for :users, controllers: { registrations: 'registrations' }
-  devise_scope :user do
- get 'user/profile', to: 'devise/registrations#profile', as: :profile
- get '/users',   to: 'users#index',   via: 'get'
- get '/users/:user_id', to: 'users#show', as: :showprofile
-end
-
-resources "contacts", only: [:new, :create]
-
+  # ROOT
   root 'dogs#index'
-  get 'legislation', to: 'pages#', as: :legislation
-  get 'contact', to: 'pages#', as: :contact
-  get 'qui-sommes-nous', to: 'pages#', as: :quisommesnous
+  # ===========================================================================
+  # A quoi servent ces routes non définies ?
+  # get 'contact_form/new'
+  # get 'contact_form/create'
+  # ===========================================================================
+  # DEVISE
+  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_scope :user do
+   get 'user/profile', to: 'devise/registrations#profile', as: :profile
+   # Why do you need this route ?
+   get '/users',   to: 'users#index',   via: 'get'
+   # Anyone can see another user's profile ?
+   get '/users/:user_id', to: 'users#show', as: :showprofile
+  end
+  # CONTACTS (Messages to project team)
+  resources "contacts", only: [:new, :create]
+  # STATIC PAGES
+  get 'legislation', to: 'pages#legislation', as: :legislation
+  # ===========================================================================
+  # Unused...
+  get 'contact', to: 'pages#contact', as: :contact
+  # ===========================================================================
+  get 'qui-sommes-nous', to: 'pages#qui_sommes_nous', as: :quisommesnous
+  # DOGS SEARCH
   get 'index2', to: 'dogs#index2', as: :index_search
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
- resources :dogs do
-  member do
-    put "like", to: "dogs#upvote"
-    put "dislike", to: "dogs#downvote"
+  resources :dogs do
+    member do
+      put "like", to: "dogs#upvote"
+      put "dislike", to: "dogs#downvote"
+    end
+    resources :reviews, only: [:new, :create, :show, :index]
+    resources :bookings, only: [:new, :create, :show]
   end
-  resources :reviews, only: [:new, :show, :index] do
-    post 'reviews', to: 'reviews#create', as: :create_review
- 	end
-  resources :bookings, only: [:new, :create, :show] do
-  end
-
-end
-
 end
 

@@ -1,5 +1,7 @@
 class DogsController < ApplicationController
- skip_before_action :authenticate_user!, only: [:index, :show, :create, :edit, :destroy, :index2, :upvote, :downvote]
+  # If it is only: [every_actions...] => Use except: [:some_actions]
+  # skip authenticate before all except :new ?
+  skip_before_action :authenticate_user!, only: [:index, :show, :create, :edit, :destroy, :index2, :upvote, :downvote]
   def index
   # @dogs = Dog.order(:nickname).page params[:page]
    @dogs = policy_scope(Dog).page params[:page]
@@ -57,6 +59,7 @@ class DogsController < ApplicationController
     redirect_to dogs_path
   end
 
+  # Bad name for this method...
   def index2
      if params[:query].present?
         @dogs = Dog.where("breed ILIKE ?", "%#{params[:query]}%").page params[:dog]
@@ -76,26 +79,28 @@ class DogsController < ApplicationController
     end
   end
 
-def upvote
-  @dog = Dog.find(params[:id])
-  @dog.upvote_by current_user
-  authorize @dog
-  redirect_to dogs_path
-end
-
-def downvote
-  @dog = Dog.find(params[:id])
-  @dog.downvote_by current_user
+  def upvote
+    @dog = Dog.find(params[:id])
+    @dog.upvote_by current_user
     authorize @dog
-  redirect_to dogs_path
-end
+    redirect_to dogs_path
+  end
 
- def age
+  def downvote
+    @dog = Dog.find(params[:id])
+    @dog.downvote_by current_user
+      authorize @dog
+    redirect_to dogs_path
+  end
+  # ===========================================================================
+  # Where is it used ?
+  def age
   @dog = Dog.find(params[:id])
   @age = Date.today.year - @dog.birthday_date.year
   # @age -= 1 if Date.today < @dogs.birthday_date + @age.years
    #for days before birthday
- end
+  end
+  # ===========================================================================
 
   private
   def dog_params

@@ -1,3 +1,6 @@
+// Why doing it only on dog_address field ?
+//  => No autocomplete on user profile creation ?
+
 function autocomplete() {
   document.addEventListener("DOMContentLoaded", function() {
     var dogAddress = document.getElementById('dog_address');

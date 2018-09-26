@@ -6,6 +6,7 @@ ruby '2.5.1'
 gem 'mail_form'
 
 gem 'figaro'
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'cloudinary'
 gem 'geocoder'
 gem 'carrierwave', '~> 1.2'

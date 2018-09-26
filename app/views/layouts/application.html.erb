@@ -4,8 +4,9 @@
     <title>Les Molosses</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <%= stylesheet_link_tag 'application' %>
   </head>
 
   <body>
@@ -15,13 +16,14 @@
       <p class="alert"><%= alert %></p>
     <%= yield %>
       <%= render 'shared/footer' %>
-
-      <%= javascript_include_tag "application" %>
+      <%= javascript_include_tag 'application' %>
+      <!-- DO NOT USE SERVER KEY HERE !!! -->
+      <!-- It is visible in the DOM  -->
+      <!-- Create a browser key for Google Maps Places API only, restricted to localhost:3000 and your domain only -->
+      <!-- And use it here as following : -->
+      <!-- <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %> -->
       <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_SERVER_KEY']}" %>
-      <%= javascript_pack_tag "map" %>
       <%= javascript_pack_tag 'application' %>
-
-
-
+      <%= javascript_pack_tag "map" %>
   </body>
 </html>

@@ -7,13 +7,18 @@ class ReviewsController < ApplicationController
     authorize @review
   end
 
-  def create  
+  def create
 
     @dog = Dog.find(params[:dog_id])
     @review = Review.new(review_params)
        authorize @review
-    @review.dog_id = @dog.id
-    
+    # ========================================================================
+    # On ne manipule pas des ids...
+    # @review.dog_id = @dog.id
+    # Mais plutot des objets =>
+    @review.dog = @dog
+    # ========================================================================
+
     @review.save!
   	if @review.save
      redirect_to dog_path(@dog)
@@ -21,11 +26,11 @@ class ReviewsController < ApplicationController
      render :new
    end
   end
-  
+
   def show
     @review = Review.find(params[:id])
     authorize @review
-  end 
+  end
 
 private
   def review_params
