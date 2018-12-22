@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: blog_production
-  username: blog
+  database: molosses_production
+  username: molosses # Use the heroku app name
   password: <%= ENV['BLOG_DATABASE_PASSWORD'] %>
