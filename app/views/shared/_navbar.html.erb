@@ -1,61 +1,33 @@
+<div class="navbar-wagon">
+  <!-- Logo -->
+  <a href="/" class="navbar-wagon-brand">
+    <%= image_tag "logo.png", alt: "coworking", size: "150x500" %>
+    <!-- <img src="../../assets/images/logo.png" alt="logo"> -->
+  </a>
 
-<body>
+  <!-- Right Navigation -->
+  <div class="navbar-wagon-right hidden-xs hidden-sm">
 
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">
-    <%= image_tag "logo.png", alt: "coworking", size: "135x51" %></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "PROTECTION DES ANNIMAUX", legislation_path, class: 'link-to-nav'%><span class="sr-only">(current)</span></li>
-        <li><%= link_to "Notre service", quisommesnous_path, class: 'link-to-nav'%>
-        </li>
-        <li><%= link_to "La Communauté", users_path, class: 'link-to-nav'%>
-        </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-
-
-        <% if current_user%>
-
-          <li class="dropdown">
-            <li><%= link_to "Ajouter votre chien", new_dog_path, class:"btn-inscription"%></li>
-
-          <% if user_signed_in? && current_user.avatar.present? %>
-             <img src="<%= cl_image_path current_user.avatar %>" class="avatar-navbar dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    <% if current_user%>
+      <div class="navbar-wagon-item">
+        <div class="dropdown">
+          <%= link_to "Ajouter votre chien", new_dog_path, class:"btn-orange"%>
+        <% if user_signed_in? && current_user.avatar.present? %>
+          <img src="<%= cl_image_path current_user.avatar %>" class="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown" role="button">
         <% else %>
-            <img src="<%= image_path "avatar.png" %>" class="avatar-navbar dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img src="https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198" class="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
          <% end %>
-            <ul class="dropdown-menu">
-              <li class="menu-profil"><%= link_to 'Mes coups de coeur',profile_path%></li>
-               <li class="menu-edit-profile"><%= link_to 'Mon profil',edit_user_registration_path%></li>
-              <li class="menu-edit-profile"><%= link_to 'Mes réglages',edit_user_registration_path%></li>
-              <li role="separator" class="divider"></li>
-              <li class="menu-logout"><%= link_to 'Logout',destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-            </ul>
-          </li>
 
-            <% else %>
-           <div class="nav-connexion">
-           <%= link_to "Se connecter",new_user_session_path, class: "btn-sple-or"%>
-           <div><hr class="barre-nav" /></div>
-             <%= link_to "S'inscrire",new_user_registration_path, class: "btn-sple-or"%>
-           <% end %>
-          </div>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+          <li><%= link_to 'Profile',edit_user_registration_path%></li>
+          <li><%= link_to 'Logout',destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+          </ul>
+        </div>
+      </div>
+    
+    <% else %>
+      <%= link_to "Se connecter",new_user_session_path, class: "btn btn-reverse btn-primary"%>
+      <%= link_to "S'inscrire",new_user_registration_path, class: "btn btn-reverse btn-primary"%>
+      <% end %>
+  </div>
+</div>

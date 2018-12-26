@@ -1,0 +1,47 @@
+
+  <div class=container>
+    <div class=row>
+      <div class="text-center">
+        <h2>Booking confirmed !</h2>
+        <p>Here is the detail of your booking :</p>
+      </div>
+    </div>
+
+    <div class=row>
+      <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <div class="card card-booking">
+          <ul>
+            <li><strong>Start Date :</strong> <%= @booking.start_date %></li>
+            <br>
+            <li><strong>End Date :</strong> <%= @booking.end_date %></li>
+            <br>
+            <li><strong>Price for the dog :</strong> <%= @booking.dog.price %> €</li>
+            <br>
+            <li><strong>Maitre :</strong> <%= @booking.user.email %></li>
+            <br>
+          </ul>
+        </div>
+      </div>
+      <br>
+      <div class=row>
+        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+          <div class="text-center">
+            <%= link_to "Back to the list", dogs_path%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

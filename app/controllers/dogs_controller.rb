@@ -1,19 +1,24 @@
 class DogsController < ApplicationController
- skip_before_action :authenticate_user!, only: [:index, :show, :create, :edit, :destroy, :index2, :upvote, :downvote]
+   skip_before_action :authenticate_user!, only: [:index, :show, :create, :edit, :destroy, :index2]
+   
   def index
-  # @dogs = Dog.order(:nickname).page params[:page]
-   @dogs = policy_scope(Dog).page params[:page]
-
-  # @records = policy_scope(Record).paginate(params[:page])
+   # @dogs = Dog.all
+   @dogs = policy_scope(Dog)
   end
-
+  
   def show
     @dog = Dog.find(params[:id])
     authorize @dog
+    if @dog.latitude
+      @marker = [{
+        lat: @dog.latitude,
+        lng: @dog.longitude,
+      }]
+    end
   end
 
   def new
-   @dog = Dog.new
+   @dog = Dog.new 
    authorize @dog
   end
 
@@ -35,11 +40,11 @@ class DogsController < ApplicationController
 
   def update
     @dog = Dog.find(params[:id])
-    authorize @dog
+    authorize @dog 
     if @dog.update(dog_params)
       redirect_to dog_path(@dog)
     else
-      render :edit
+      render :new
     end
   end
 
@@ -51,53 +56,23 @@ class DogsController < ApplicationController
   end
 
   def index2
-
-    if params[:query].present?
-      @dogs = policy_scope(Dog.where("breed ILIKE ?", "%#{params[:query]}%").page params[:dog])
-      # @lands_geo = Land.search_by_title_and_address(params[:query]).where.not(latitude: nil, longitude: nil)
-      @dogs_geo = Dog.where.not(latitude: nil, longitude: nil)
-    else
-      @dogs = policy_scope(dog)
-      @dogs_geo = Dog.where.not(latitude: nil, longitude: nil)
+     if params[:query].present?
+        @dogs = Dog.where("breed ILIKE ?", "%#{params[:query]}%")
+      else
+        @dogs = Dog.all
     end
-
-     authorize @dogs
-
-     @markers = @dogs_geo.map do |dog|
-     {
-       lat: dog.latitude,
-       lng: dog.longitude,
-       nickname: dog.nickname
-     }
+    @dogsmarkers = Dog.where.not(latitude: nil, longitude: nil)
+    @markers = @dogsmarkers.map do |dog|
+      {
+        lat: dog.latitude,
+        lng: dog.longitude
+      }
     end
-
-
   end
-
-def upvote
-  @dog = Dog.find(params[:id])
-  @dog.upvote_by current_user
-  authorize @dog
-  redirect_to dogs_path
-end
-
-def downvote
-  @dog = Dog.find(params[:id])
-  @dog.downvote_by current_user
-    authorize @dog
-  redirect_to dogs_path
-end
-
- def age
-  @dog = Dog.find(params[:id])
-  @age = Date.today.year - @dog.birthday_date.year
-  # @age -= 1 if Date.today < @dogs.birthday_date + @age.years
-   #for days before birthday
- end
 
   private
   def dog_params
-    params.require(:dog).permit(:picture, :address, :video, :nickname, :breed, :size, :hair, :color, :lof_number, :description, :birthday_date, :medical_analyse, :father_lof, :mother_lof, :price, :eye_color, :version, :weight, :prize)
+    params.require(:dog).permit(:picture, :video, :nickname, :breed, :size, :hair, :color, :lof_number, :description, :birthday_date, :prize, :medical_analyse, :father_lof, :mother_lof, :price)
   end
 end
 
