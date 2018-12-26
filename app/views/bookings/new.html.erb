@@ -1,0 +1,19 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4 ">
+<br>
+<br>
+<br>
+      <%=  simple_form_for [@dog, @booking] do |f| %>
+
+      <label class="date optional" for="booking_start_date">Start date</label>
+      <input type="date" id="booking_start_date" name="booking[start_date]">
+      <label class="date optional" for="booking_end_date">End date</label>
+      <input type="date" id="booking_end_date" name="booking[end_date]">
+      <%= f.button :button, "Submit my booking", type: :submit, class: "btn btn-warning"%>
+      <% end %>
+    </div>
+  </div>
+</div>
