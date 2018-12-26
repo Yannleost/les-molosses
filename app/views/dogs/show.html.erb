@@ -89,14 +89,15 @@
       </div>
 
      <div class="row">
-        <div class="col-xs-12 col-sm-9 col-md-9">
+        <div class="card-show col-xs-12 col-sm-8 col-md-9">
             <div class="map-show">
           📍<%= @dog.address %>
            <div
-          id="map"
-          style="min-width: 100%;
-          min-height: 100%;"
-          data-markers="<%= @marker.to_json %>">
+            id="map"
+            style="min-width: 100%;
+            min-height: 300px;"
+            data-markers="<%= [{lat:@dog.latitude, lng:@dog.longitude}].to_json %>"
+            data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 p "seeding one user"
 
-  User.create!(
+  User.create(
      email: "jean.lebon.lbc@gmail.com",
      password: "azerty",
      first_name: "Jean",
@@ -16,7 +16,7 @@ p "seeding one user"
      introduction: "Salut j'aime les annimaux et je souhaite le meilleur pour mon annimal"
   )
 
-  User.create!(
+  User.create(
     email: "yannleost@gmail.com",
     password: "azerty",
     first_name: "yann",
@@ -68,6 +68,7 @@ p "user created, let's seed dogs"
     prize: prize.shuffle.sample
     )
   dog.save
+  sleep(2)
  end
 
  p "dog & user seeded"

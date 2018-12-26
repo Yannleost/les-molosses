@@ -10,13 +10,6 @@ class DogsController < ApplicationController
   def show
     @dog = Dog.find(params[:id])
     authorize @dog
-    if @dog.latitude
-      @marker = [{
-        lat: @dog.latitude,
-        lng: @dog.longitude,
-        label: "#{@dog.nickname}"
-      }]
-    end
   end
 
   def new
@@ -58,22 +51,27 @@ class DogsController < ApplicationController
   end
 
   def index2
-     if params[:query].present?
-        @dogs = Dog.where("breed ILIKE ?", "%#{params[:query]}%").page params[:dog]
-        @dogs_geo = @dogs.where.not(latitude: nil, longitude: nil)
-      else
-        @dogs = Dog.all.page params[:page]
-        @dogs_geo = @dogs.where.not(latitude: nil, longitude: nil)
+
+    if params[:query].present?
+      @dogs = policy_scope(Dog.where("breed ILIKE ?", "%#{params[:query]}%").page params[:dog])
+      # @lands_geo = Land.search_by_title_and_address(params[:query]).where.not(latitude: nil, longitude: nil)
+      @dogs_geo = Dog.where.not(latitude: nil, longitude: nil)
+    else
+      @dogs = policy_scope(dog)
+      @dogs_geo = Dog.where.not(latitude: nil, longitude: nil)
     end
 
-    authorize @dogs
-    @markers = @dogs_geo.map do |dog|
-      {
-        lat: dog.latitude,
-        lng: dog.longitude,
-        infoWindow: { content: render_to_string(partial: "/dogs/map", locals: { dog: dog }) }
-      }
+     authorize @dogs
+
+     @markers = @dogs_geo.map do |dog|
+     {
+       lat: dog.latitude,
+       lng: dog.longitude,
+       nickname: dog.nickname
+     }
     end
+
+
   end
 
 def upvote
