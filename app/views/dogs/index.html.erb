@@ -1,152 +1,68 @@
 
-<div class="banner" style="background-image: url('<%= asset_path'Chien.landing.jpg', height: 200, width: 300%>');">
-    <div class="banner-content">
-      <h1>L'AMOUR AVEC UN GRAND OUAF</h1>
-
-      <%= link_to "INSCRIRE SON MOLOSSE", new_dog_path, class: "big-button btn btn-reverse btn-warning"%>
-      <div class="search-index2">
-      <div class= "search-bar">
-      <%= form_tag index_search_path, method: :get do %>
-      <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "Chercher un chien par son pédigrée !" %>
-       </div>
-          <button class="btn-search-index2"> </button>
-         <% end %>
-      </div>
-    </div>
-  </div>
-
 <div class="container">
+	<div class="banner" style="background-image: url('<%= asset_path'chiens-heureux-jouent-a-deux-full-13651707.jpg'%>');">
+	  <div class="banner-content">
+	    <h1>L'AMOUR AVEC UN GRAND OUAF</h1>
+      
+	    <%= link_to "INSCRIRE SON MOLOSSE", new_dog_path, class: "big-button btn btn-reverse btn-warning"%>
+
+      <%= form_tag index_search_path, method: :get do %>
+		  <%= text_field_tag :query,
+   			 	params[:query],
+    			class: "form-control",
+    			placeholder: "Chercher un chien par son pédigrée !" %>
+          <button class="btn-search btn-warning "> search
+          </button>
+			<% end %>
+	  </div>
+	</div>
 
   <div class="row">
-
      <% @dogs.each do |dog| %>
-        <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="col-xs-12 col-sm-4">
+          <% if dog.picture_url  %>
           <div class="card">
-              <div class="card-head">
-                 <%= link_to cl_image_tag(dog.picture, class:"card-image"), dog_path(dog)%>
-                <div class="card-title">
-                    <h2><%= dog.nickname %> </h2>
-                </div>
-                <div class="card-avatar">
-                <% if dog.user.avatar_url %>
-                <%= link_to cl_image_tag(dog.user.avatar_url, class:"avatar-index"), showprofile_path(dog.user)%>
-                <% else %>
-                  <%= link_to image_tag("avatar.png", alt:"logo", class:"avatar-index"), showprofile_path(dog.user) %>
-                <% end %>
-               </div>
-                <div class="card-like">
-                    <%= link_to like_dog_path(dog), method: :put do %>
-                    <p><%= dog.get_upvotes.size %> <p>
-                    <%end%>
-                    <%= link_to dislike_dog_path(dog), method: :put do %>
-                    <p><%= dog.get_downvotes.size %> <p>
-                    <%end%>
-                </div>
-              </div>
-             <div class="card-footer">
-                  <div class="card-footer-title">
-                   <div class="card-footer-breed" style="text-transform :uppercase"> <%= dog.breed %> </div>
-                   <div class="card-footer-version"> <%= dog.version %> </div>
-                 </div>
-                <div class="card-footer-price">
-                 <%= dog.price %>€ / Saillie
-                </div>
-               <div class = "card-ville">
-                   📍<%= dog.address %>
-               </div>
-             </div>
+          <div class="card-image"
+            style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+         url('<%= cl_image_path dog.picture, height: 300, width: 400, crop: :fill %>')">
+            <div class="card-description"><h2><%= link_to dog.nickname, dog_path(dog) %>  </h2>
+               <% if dog.user.avatar_url %>
+                <%= cl_image_tag dog.user.avatar_url, class: "card-user" %>
+              <% else %>
+               <%= image_tag "avatar.png", alt:"logo", class:"card-user"%>
+               <% end %>
+            </div>
+          
+          <div class="card-footer">
+            <p><%= dog.description %> </p>
+            <p><%= dog.price %>€</p>
          </div>
+         </div>
+        </div>
+            <!-- <a class="card-link" href="#" ></a> -->
+         <% else %>
+           <div class="card">
+          <div class="card-image"
+            style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+         url('<%= asset_path'images-2.jpg', height: 300, width: 400, crop: :fill %>')">
+              <div class="card-description"><h2><%= link_to dog.nickname, dog_path(dog) %></h2>
+              <% if dog.user.avatar_url %>
+                <%= cl_image_tag dog.user.avatar_url, class: "card-user" %>
+              <% else %>
+               <%= image_tag "avatar.png", alt:"logo", class:"card-user"%>
+               <% end %>
+              </div>
+                
+            <div class="card-footer">
+              <p><%= dog.description %> </p>
+              <p><%= dog.price %>€</p>
+            </div > 
+            </div>
+            </div>
+         <% end %>
         </div>
       <% end %>
     </div>
   </div>
 
-  <br>
 
-   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-      <div class="banner-numbers-titre">
-          La 1ère plateforme specialisée toutou
-      </div>
-     </div>
-       <br>
-      <br>
-     <div class="row banner-number">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="number-card">
-                <img src="https://png.icons8.com/dotty/50/000000/dog.png", class="image-number">
-                <div class="legende-number-card">1500 Molosses inscrits</div>
-              </div>
-            </div>
-
-           <div class="col-xs-12 col-sm-6 col-md-3">
-             <div class="number-card">
-                <img src="https://png.icons8.com/wired/50/000000/meeting.png", class="image-number">
-                   <div class="legende-number-card">150 Rencontres respecteuses </div>
-             </div>
-           </div>
-
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="number-card">
-                <img src="https://png.icons8.com/dotty/50/000000/flying-stork-with-bundle.png", class="image-number"
-                >
-                   <div class="legende-number-card">65 Mini-molosses </div>
-             </div>
-           </div>
-
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="number-card">
-                <img src="https://png.icons8.com/dotty/50/000000/flying-stork-with-bundle.png", class="image-number"
-                >
-                   <div class="legende-number-card">Chaque annonce est contrôlée</div>
-             </div>
-           </div>
-         </div>
-   </div>
-
-    <div class="container">
-
-      <div class="container-titre">
-          Comment ça marche ?
-      </div>
-    <br>
-
-   <div class="row">
-       <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card-explication">
-        <img src="https://png.icons8.com/bubbles/50/000000/male.png", class="image4">
-         <div class="cards-explication-titre">vous avez un chien mâle</div>
-         <br>
-         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam.
-         <br>
-         <%= link_to "INSCRIRE SON MOLOSSE", new_dog_path, class: "small-button btn btn-reverse btn-warning btn-inscrire"%>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card-explication">
-         <img src="https://png.icons8.com/bubbles/50/000000/female.png", class="image5">
-         <div class="cards-explication-titre">vous avez un chien femmelle</div>
-         <br>
-         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
-         <br>
-          <%= link_to "PARCOURIR LES MOLOSSES", index_search_path, class: "small-button btn btn-reverse btn-warning btn-parcourir"%>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card-explication">
-         <img src="https://png.icons8.com/dusk/50/000000/gender.png", class="image6">
-        <div class="cards-explication-titre">Rencontre Propriétaire</div>
-        <br>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta.
-        <br>
-        <%= link_to "LES PIECES A VALIDER", new_dog_path, class: "small-button btn btn-reverse btn-warning btn-valider"%>
-      </div>
-      </div>
-    </div>
-   </div>
-</div>
