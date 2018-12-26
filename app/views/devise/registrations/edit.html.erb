@@ -1,33 +1,61 @@
+
 <div class="container">
-  <div class="col-xs-12 col-sm-offset-2 col-sm-8">
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+  <h3> Mes paramètres </h3>
+  <br>
+
+  <div class="form-edit">
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+    <div class="form-edit-avatar">
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+     <div class="row bg-grey">
+       <div class="col-sm-4">
+        <h5> Photo</h5>
+        <% if @current_user.avatar_url %>
+        <%= cl_image_tag current_user.avatar_url, class: "edit-avatar" %>
+        <% else %>
+        <%= image_tag "avatar.png", class: "edit-avatar" %>
+        <% end %>
+       </div>
+       <div class="col-sm-4">
+        <%= f.input :avatar, required: false, autofocus: true, label: false%>
+        <%= f.input :avatar_cache, as: :hidden %>
+      </div>
+     </div>
+
+
+    <div class="row bg-grey">
+      <div class="col-sm-5"> <%= f.input :first_name, required: false, autofocus: true %></div>
+      <div class="col-sm-5"> <%= f.input :last_name, required: false, autofocus: true %> </div>
+    </div>
+
+    <div class="row bg-grey">
+      <div class="col-sm-5"> <%= f.input :email, required: true, autofocus: true %> </div>
+      <div class="col-sm-5  "><%= f.input :telephone, required: false, autofocus: true%></div>
+   </div>
+
+   <div class="row bg-grey">
+      <div class="col-sm-4"> <%= f.input :siret, required: false, autofocus: true %>  </div>
+   </div>
+
+   <div class="row bg-grey">
+     <div class="col-sm-6"><%= f.input :introduction, required: false, autofocus: true%></div>
+    </div>
+
+  <div class="form-actions"><%= f.button :submit, "modifier", class: "btn-form-new btn btn-warning "  %> </div>
   </div>
+  <% end %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+  <h5>Supprimer mon compte :</h5>
+
+  <p>Vous souhaitez nous quitter ? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+  <%= link_to "Back", :back %>
+
   </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
-
 </div>
 
-</div>

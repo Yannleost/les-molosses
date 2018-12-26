@@ -13,12 +13,25 @@ class DogPolicy < ApplicationPolicy
    	  true
    	end
 
+    def index2?
+      true
+    end
+
    	def update?
    	record.user == user
     end
 
     def destroy?
     record.user == user
-    
- 	end
+    end
+
+    def upvote?
+       true
+    end
+
+    def downvote?
+      true
+    end
+
+
 end

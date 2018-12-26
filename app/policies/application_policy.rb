@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    true
   end
 
   def show?
@@ -16,6 +16,10 @@ class ApplicationPolicy
 
   def create?
     false
+  end
+
+  def index2?
+    true
   end
 
   def new?
