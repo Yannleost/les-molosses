@@ -3,61 +3,46 @@
   <h2>Créer un compte </h2>
 <br>
 
-  <div class="form-new-user">
 
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
 
-     <div class="row bg-grey">
+     <div class="row">
 
        <div class="col-sm-4">
-        <%= image_tag "avatar.png", class: "edit-avatar" %>
-        <%= f.input :avatar, required: false, autofocus: true %>
+        <%= f.input :avatar, required: false, autofocus: true, label:'Votre photo de profil ' %>
         <%= f.input :avatar_cache, as: :hidden %>
       </div>
     </div>
 
-    <div class="row bg-grey">
-      <div class="col-sm-5"><%= f.input :first_name, required: false, autofocus: true%></div>
-      <div class="col-sm-5"><%= f.input :last_name, required: false, autofocus: true%></div>
+    <div class="row">
+      <div class="col-xs-12 col-md-4"><%= f.input :first_name, required: false, autofocus: true, label: 'Votre prénom'%></div>
     </div>
 
-    <div class="row bg-grey">
-      <div class="col-sm-5" ><%= f.input :email, required: true, autofocus: true, placeholder: 'pierre.paul.jaques@gmail.com' %></div>
-      <div class="col-sm-5"><%= f.input :telephone, required: false, autofocus: true%></div>
+    <div class="row">
+     <div class="col-xs-12 col-md-4"><%= f.input :email, required: true, autofocus: true, placeholder: 'Vous.ne.recevrezpasde.newelleter@gmail.com', label: 'Votre adresse e-mail' %></div>
     </div>
 
-    <div class="row bg-grey"">
-      <div class="col-sm-5"> <%= f.input :siret, required: false, autofocus: true %> </div>
-    </div>
-
-    <div class="row bg-grey"">
-      <div class="col-sm-5"> <%= f.input :address, required: false, autofocus: true %></div>
-    </div>
-
-    <div class="row bg-grey">
-      <div class="col-sm-5"><%= f.input :introduction, required: false, autofocus: true %></div>
-    </div>
-
-    <div class="row bg-grey">
-      <div class="col-sm-5"><%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+    <div class="row">
+      <div class="col-xs-12 col-md-4"><%= f.input :password, required: true, label: 'Votre mot de passe', hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
       </div>
     </div>
 
-     <div class="row bg-grey">
-      <div class="col-sm-5"><%= f.input :password_confirmation, required: true %>
+     <div class="row">
+      <div class="col-xs-12 col-md-4"><%= f.input :password_confirmation, required: true, label: 'Confirmation du mot de passe' %>
       </div>
     </div>
 
     <div class="form-actions">
-      <%= f.button :button, "Créer", type: :submit, class: :'btn-form-new btn btn-warning' %>
+      <%= f.button :button, "Créer", type: :submit, class: :'btn-warning col-xs-12 col-sm-4' %>
     </div>
 
     <% end %>
-  </div>
+
+
 </div>
-  <br>
-  <br>
+
+
 
 
 
